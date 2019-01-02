@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PeliculasService } from '../peliculas.service';
 
 @Component({
   selector: 'app-films-list',
@@ -6,12 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./films-list.component.css']
 })
 export class FilmsListComponent implements OnInit {
-  titulo: string;
-  constructor() { }
+  films: Array<any>;
+  title: string;
+  constructor(private peliculasService: PeliculasService) { }
 
   ngOnInit() {
-    this.titulo = 'Listado de Peliculas';
+    this.title = 'Listado de Peliculas';
     console.log('Componente listado de peliculas cargado');
+    this.getPeliculas();
   }
-
+  getPeliculas() {
+    this.peliculasService.getFilms().subscribe(
+      result => {
+        this.films = result.results;
+        console.log(result);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }
