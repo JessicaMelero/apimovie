@@ -19,6 +19,10 @@ const routes: Routes = [
     component: NotFoundComponent
   },
   {
+    path: '',
+    component: FilmsListComponent
+  },
+  {
     path: '**',
     redirectTo: '/404'
   }
